@@ -10,8 +10,13 @@
     }
   ],
   "require": {
-    "wp-coding-standards/wpcs": "^2.3.0",
+    "wp-coding-standards/wpcs": "^3.0",
     "phpcompatibility/phpcompatibility-wp": "^2.1.4",
     "dealerdirect/phpcodesniffer-composer-installer": "^0.7.1"
+  },
+  "config": {
+    "allow-plugins": {
+      "dealerdirect/phpcodesniffer-composer-installer": true
+    }
   }
 }
