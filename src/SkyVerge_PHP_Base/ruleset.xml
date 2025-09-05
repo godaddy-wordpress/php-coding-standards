@@ -18,64 +18,51 @@
 	<!-- Don't allow more than one consecutive blank line (in default cases - does not apply to between functions, etc.) -->
 	<rule ref="Squiz.WhiteSpace.SuperfluousWhitespace" />
 
-	<!-- Space inside parens -->
-	<rule ref="Generic.WhiteSpace.ArbitraryParenthesesSpacing">
-		<properties>
-			<property name="spacing" value="1" />
-		</properties>
-	</rule>
-
-	<!-- Tab indents -->
-	<rule ref="Generic.WhiteSpace.ScopeIndent">
-		<properties>
-			<property name="indent" value="1" />
-			<property name="tabIndent" value="true" />
-			<property name="ignoreIndentationTokens" type="array" value="T_COMMENT,T_DOC_COMMENT_OPEN_TAG" />
-		</properties>
-	</rule>
-
-	<!-- 2 blank lines between functions -->
-	<rule ref="Squiz.WhiteSpace.FunctionSpacing" />
-
-	<!-- Opening function brace should be on the same line as declaration with 1 space between paren and brace -->
-	<rule ref="Generic.Functions.OpeningFunctionBraceKernighanRitchie">
-		<properties>
-			<property name="checkClosures" value="true" />
-		</properties>
-	</rule>
-
 	<!-- 1 space after a 'not' operator e.g. if ( ! $something ) {} -->
 	<rule ref="Generic.Formatting.SpaceAfterNot" />
 
 	<!-- 1 space after a type cast e.g. (int) $somevar -->
 	<rule ref="Generic.Formatting.SpaceAfterCast" />
 
-	<!-- Align multiple subsequent assignments -->
-	<rule ref="Generic.Formatting.MultipleStatementAlignment">
-		<properties>
-			<property name="maxPadding" value="20" />
-		</properties>
-	</rule>
-
-	<!-- 1 space inside function call parens
-		This sniff includes errors we don't want, but we still need to set the required
-		spaces properties, so we set those values here, but set severity to 0 so they are
-		ignored, then we explicitly include the sniffs we want below.
-	 -->
-	<rule ref="PEAR.Functions.FunctionCallSignature">
-		<properties>
-			<property name="requiredSpacesAfterOpen" value="1"/>
-			<property name="requiredSpacesBeforeClose" value="1"/>
-		</properties>
-		<severity>0</severity>
-	</rule>
-
-	<rule ref="PEAR.Functions.FunctionCallSignature.SpaceAfterOpenBracket" />
-	<rule ref="PEAR.Functions.FunctionCallSignature.SpaceBeforeCloseBracket" />
-
     <!-- Run against the PHPCompatibilityWP ruleset -->
     <rule ref="PHPCompatibilityWP" />
 
     <!-- Check for cross-version support for PHP 7.4 and higher. -->
     <config name="testVersion" value="7.4-"/>
+
+    <!-- WordPress Exclusions -->
+    <rule ref="WordPress">
+        <exclude name="WordPress.DB.DirectDatabaseQuery.NoCaching" />
+        <exclude name="WordPress.DB.DirectDatabaseQuery.DirectQuery" />
+        <exclude name="WordPress.DB.DirectDatabaseQuery.SchemaChange" />
+    </rule>
+
+    <!-- WooCommerce Sanitization / Escaping Functions -->
+    <rule ref="WordPress.Security.ValidatedSanitizedInput">
+        <properties>
+            <property name="customSanitizingFunctions" type="array">
+                <element value="wc_clean"/>
+                <element value="wc_sanitize_tooltip"/>
+                <element value="wc_format_decimal"/>
+                <element value="wc_stock_amount"/>
+                <element value="wc_sanitize_permalink"/>
+                <element value="wc_sanitize_textarea"/>
+            </property>
+        </properties>
+        <exclude name="WordPress.Security.ValidatedSanitizedInput.MissingUnslash" />
+    </rule>
+
+    <rule ref="WordPress.Security.EscapeOutput">
+        <properties>
+            <property name="customEscapingFunctions" type="array">
+                <element value="wc_help_tip"/>
+                <element value="wc_sanitize_tooltip"/>
+                <element value="wc_selected"/>
+                <element value="wc_kses_notice"/>
+                <element value="wc_esc_json"/>
+                <element value="wc_query_string_form_fields"/>
+                <element value="wc_make_phone_clickable"/>
+            </property>
+        </properties>
+    </rule>
 </ruleset>
