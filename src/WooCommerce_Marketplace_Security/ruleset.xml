@@ -1,0 +1,80 @@
+<?xml version="1.0"?>
+<ruleset name="WooCommerce Marketplace PHPCS Security Checks">
+    <description>WooCommerce Marketplace PHPCS Security Checks.</description>
+
+    <arg value="sp"/>
+    <arg name="colors"/>
+    <arg name="extensions" value="php"/>
+
+    <config name="minimum_wp_version" value="7.4"/>
+    <rule ref="WordPress.Security.EscapeOutput">
+        <severity>5</severity>
+    </rule>
+
+    <rule ref="WordPress.Security.NonceVerification"><severity>0</severity></rule>
+
+    <rule ref="Internal.NoCodeFound">
+        <severity>0</severity>
+    </rule>
+
+    <rule ref="Internal.LineEndings.Mixed">
+        <severity>0</severity>
+    </rule>
+
+    <rule ref="Internal.Exception">
+        <severity>0</severity>
+    </rule>
+
+    <rule ref="WordPress.Security.ValidatedSanitizedInput.MissingUnslash">
+        <severity>0</severity>
+    </rule>
+
+    <rule ref="WordPress.Security.ValidatedSanitizedInput.InputNotValidated">
+        <severity>0</severity>
+    </rule>
+
+    <rule ref="WordPress.Security.EscapeOutput.ExceptionNotEscaped">
+        <severity>0</severity>
+    </rule>
+
+    <rule ref="WordPress.Security.EscapeOutput.DeprecatedWhitelistCommentFound">
+        <severity>0</severity>
+    </rule>
+
+    <rule ref="Generic.PHP.ForbiddenFunctions">
+        <properties>
+            <property name="error" value="false" />
+            <property name="forbiddenFunctions" type="array" value="wp_set_auth_cookie=>null,wp_set_current_user=>null"/>
+        </properties>
+    </rule>
+
+    <rule ref="WordPress.Security.PluginMenuSlug"/>
+    <rule ref="WordPress.Security.SafeRedirect"/>
+
+    <rule ref="WordPress.Security.ValidatedSanitizedInput.InputNotSanitized">
+        <severity>5</severity>
+    </rule>
+
+    <!--
+        Disables the following violation flags, as they are not directly related to "Security":
+        - Use of a direct database call is discouraged.
+        - Direct database call without caching detected. Consider using wp_cache_get() \\/ wp_cache_set() or wp_cache_delete().
+    -->
+    <rule ref="WordPress.DB.DirectDatabaseQuery">
+        <severity>0</severity>
+    </rule>
+
+    <!-- Enabled -->
+    <rule ref="WordPress.DB.PreparedSQLPlaceholders">
+        <severity>5</severity>
+    </rule>
+    <rule ref="WordPress.DB.PreparedSQL">
+        <severity>5</severity>
+    </rule>
+    <rule ref="WordPress.DB.RestrictedClasses">
+        <severity>5</severity>
+    </rule>
+    <rule ref="WordPress.DB.RestrictedFunctions">
+        <severity>5</severity>
+    </rule>
+</ruleset>
