@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<ruleset name="SkyVerge WooCommerce Security" namespace="SkyVerge\Standards\WooSecurity">
+
+	<description>SkyVerge WooCommerce Security Standards combining Marketplace Security and custom functions</description>
+
+	<!-- Include WooCommerce Marketplace Security rules -->
+	<rule ref="../WooCommerce_Marketplace_Security" />
+
+	<!-- Include WooCommerce custom sanitization and escaping functions -->
+	<rule ref="../SkyVerge_Woo_Functions" />
+
+</ruleset>
