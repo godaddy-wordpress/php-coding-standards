@@ -44,7 +44,10 @@
     <rule ref="Generic.PHP.ForbiddenFunctions">
         <properties>
             <property name="error" value="false" />
-            <property name="forbiddenFunctions" type="array" value="wp_set_auth_cookie=>null,wp_set_current_user=>null"/>
+            <property name="forbiddenFunctions" type="array">
+                <element key="wp_set_auth_cookie" value="null"/>
+                <element key="wp_set_current_user" value="null"/>
+            </property>
         </properties>
     </rule>
 
